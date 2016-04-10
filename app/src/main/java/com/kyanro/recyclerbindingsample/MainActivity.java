@@ -11,17 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kyanro.recyclerbindingsample.databinding.ActivityMainBinding;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.simple_rv);
         List<Item> items = new ArrayList<>(3);
         items.add(new Item("hoho", "hoge"));
         items.add(new Item("fufu", "fuga"));
@@ -35,9 +38,8 @@ public class MainActivity extends AppCompatActivity {
         items.add(new Item("hoho", "hoge"));
         items.add(new Item("fufu", "fuga"));
         items.add(new Item("pipi", "piyo"));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new TextRecyclerAdapter(items));
-
+        binding.simpleRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        binding.simpleRv.setAdapter(new TextRecyclerAdapter(items));
     }
 
     public static class Item {
