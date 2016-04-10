@@ -1,5 +1,7 @@
 package com.kyanro.recyclerbindingsample;
 
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,32 +22,53 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.simple_rv);
-        List<String> words = new ArrayList<>(3);
-        words.add("hoge");
-        words.add("fuga");
-        words.add("piyo");
+        List<Item> items = new ArrayList<>(3);
+        items.add(new Item("hoho", "hoge"));
+        items.add(new Item("fufu", "fuga"));
+        items.add(new Item("pipi", "piyo"));
+        items.add(new Item("hoho", "hoge"));
+        items.add(new Item("fufu", "fuga"));
+        items.add(new Item("pipi", "piyo"));
+        items.add(new Item("hoho", "hoge"));
+        items.add(new Item("fufu", "fuga"));
+        items.add(new Item("pipi", "piyo"));
+        items.add(new Item("hoho", "hoge"));
+        items.add(new Item("fufu", "fuga"));
+        items.add(new Item("pipi", "piyo"));
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new TextRecyclerAdapter(words));
+        recyclerView.setAdapter(new TextRecyclerAdapter(items));
 
     }
 
+    public static class Item {
+        public String title;
+        public String body;
+
+        public Item(String title, String body) {
+            this.title = title;
+            this.body = body;
+        }
+    }
 
     static class TextRecyclerAdapter extends RecyclerView.Adapter<TextRecyclerAdapter.ViewHolder> {
+
         static class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView title;
-            public TextView body;
+            ViewDataBinding binding;
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                title = (TextView) itemView.findViewById(R.id.title_text);
-                body = (TextView) itemView.findViewById(R.id.body_text);
+                binding = DataBindingUtil.bind(itemView);
+            }
+
+            ViewDataBinding getBinding() {
+                return binding;
             }
         }
 
-        List<String> words;
+        List<Item> items;
 
-        public TextRecyclerAdapter(@NonNull List<String> words) {
-            this.words = words;
+        public TextRecyclerAdapter(@NonNull List<Item> items) {
+            this.items = items;
         }
 
         @Override
@@ -57,13 +79,13 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.title.setText(String.valueOf(position));
-            holder.body.setText(words.get(position));
+            holder.getBinding().setVariable(com.kyanro.recyclerbindingsample.BR.item, items.get(position));
+            holder.getBinding().executePendingBindings();
         }
 
         @Override
         public int getItemCount() {
-            return words.size();
+            return items.size();
         }
     }
 }
