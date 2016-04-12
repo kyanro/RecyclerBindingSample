@@ -13,7 +13,7 @@
 
         <variable
             name="item"
-            type="com.kyanro.recyclerbindingsample.MainActivity.Item"
+            type="com.kyanro.recyclerbindingsample.Item"
             />
     </data>
 

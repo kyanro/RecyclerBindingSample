@@ -38,16 +38,6 @@ public class MainActivity extends AppCompatActivity {
         binding.simpleRv.setAdapter(new TextRecyclerAdapter(items, true));
     }
 
-    public static class Item {
-        public String title;
-        public String body;
-
-        public Item(String title, String body) {
-            this.title = title;
-            this.body = body;
-        }
-    }
-
     static class TextRecyclerAdapter extends RecyclerView.Adapter<TextRecyclerAdapter.ViewHolder> {
 
         static abstract class ViewHolder extends RecyclerView.ViewHolder {
