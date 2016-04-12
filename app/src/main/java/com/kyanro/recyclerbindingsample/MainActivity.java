@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 // createViewHolder のタイミングで必要なものはセット済み
             } else if (viewHolder.getItemViewType() == VIEW_TYPE_DATA) {
                 DataViewHolder holder = (DataViewHolder) viewHolder;
-                holder.getBinding().setVariable(com.kyanro.recyclerbindingsample.BR.item, items.get(position));
+                holder.getBinding().setItem(items.get(position));
                 holder.getBinding().executePendingBindings();
             }
         }
