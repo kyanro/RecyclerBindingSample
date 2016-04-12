@@ -29,18 +29,11 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         List<Item> items = new ArrayList<>(3);
-        items.add(new Item("hoho", "hoge"));
-        items.add(new Item("fufu", "fuga"));
-        items.add(new Item("pipi", "piyo"));
-        items.add(new Item("hoho", "hoge"));
-        items.add(new Item("fufu", "fuga"));
-        items.add(new Item("pipi", "piyo"));
-        items.add(new Item("hoho", "hoge"));
-        items.add(new Item("fufu", "fuga"));
-        items.add(new Item("pipi", "piyo"));
-        items.add(new Item("hoho", "hoge"));
-        items.add(new Item("fufu", "fuga"));
-        items.add(new Item("pipi", "piyo"));
+        items.add(new Item(null, "hoge1"));
+        items.add(new Item("2", "hoge2"));
+        items.add(new Item("3", "hoge3"));
+        items.add(new Item(null, "hoge4"));
+        items.add(new Item("5", "hoge5"));
         binding.simpleRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.simpleRv.setAdapter(new TextRecyclerAdapter(items, true));
     }
